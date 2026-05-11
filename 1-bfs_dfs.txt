@@ -1,7 +1,7 @@
 from collections import deque
 
 class Graph:
-    def __init__(self, vertices: int):
+    def __init__(self, vertices: int):   # FIXED
         self.vertices = vertices
         self.adj_list = {i: [] for i in range(vertices)}
 
@@ -49,38 +49,33 @@ class Graph:
 
 
 def main() -> None:
-    n = 4
-    e = 6
+    n = int(input("Enter number of vertices: "))
+    e = int(input("Enter number of edges: "))
 
     graph = Graph(n)
 
-    edges = [
-        (0, 1),
-        (0, 2),
-        (1, 2),
-        (2, 0),
-        (2, 3),
-        (3, 3),
-    ]
+    print("\nEnter edges (source destination):")
 
-    for source, destination in edges:
+    edges = []
+
+    for _ in range(e):
+        source, destination = map(int, input().split())
         graph.add_edge(source, destination)
+        edges.append((source, destination))
 
-    print("Graph: no of nodes, no of edges")
-    print(f"n = {n}, e = {e}")
+    start = int(input("\nEnter starting vertex: "))
 
-    print("\nEnter adjacent node information")
-
+    print("\nGraph:")
     for source, destination in edges:
         print(f"{source} -> {destination}")
 
-    dfs_result = graph.dfs(2)
-    bfs_result = graph.bfs(2)
+    dfs_result = graph.dfs(start)
+    bfs_result = graph.bfs(start)
 
     print("\nOutput:")
-    print("DFS from vertex 2 -", ", ".join(map(str, dfs_result)))
-    print("BFS from vertex 2 -", ", ".join(map(str, bfs_result)))
+    print("DFS -", ", ".join(map(str, dfs_result)))
+    print("BFS -", ", ".join(map(str, bfs_result)))
 
 
-if __name__ == "__main__":
+if __name__ == "__main__":   # FIXED
     main()
